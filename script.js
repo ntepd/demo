@@ -118,7 +118,7 @@ function startAutoSave() {
 }
 
 function getPlaceholderText() {
-    return 'Start typing your note... (You can use markdown in this editor) | Changes here are stored as cookies, so if you clear your cookies, you will lose your notes.';
+    return 'Start typing your note...';
 }
 
 function updatePlaceholder() {
