@@ -3,12 +3,17 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>ntepd demo</title>
+        <link rel="icon" href="images/ntepd.png" type="image/png">
+        <title>ntepd</title>
         <link rel="stylesheet" href="styles.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
         <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     </head>
+    <div id="toast" class="toast">
+        <div class="toast-content"></div>
+        <div class="toast-progress"></div>
+    </div>
     <body>
         <button class="mobile-menu-trigger">
             <i class="fas fa-bars"></i>
@@ -19,19 +24,19 @@
                 <div class="sidebar-header">
                     <div class="sidebar-top">
                         <h2 class="app-title">ntepd (demo)</h2>
+                        <div class="theme-switcher">
+                            <button id="themeToggle" class="theme-toggle-btn">
+                                <span class="theme-icon">☀️</span>
+                            </button>
+                        </div>
                     </div>
                     <button id="newNoteBtn" class="new-note-btn">
                         <span class="btn-icon">+</span>
                         <span>New Note</span>
                     </button>
-                    <div class="theme-switcher">
-                        <button id="themeToggle" class="theme-toggle-btn">
-                            <span class="theme-icon">☀️</span>
-                        </button>
-                    </div>
                 </div>
                 <div id="notesList" class="notes-list"></div>
-                <div class="version-info">v1.0.0 © 2025 ntepd.com</div>
+                <div class="version-info">v1.0.2 © 2025 ntepd.com</div>
             </div>
             <div class="editor">
                 <div id="editorContainer" class="editor-content">
@@ -42,9 +47,12 @@
                         <div id="editor" class="markdown-editor" contenteditable="true" spellcheck="false"></div>
                     </div>
                     <div class="editor-footer">
-                        <button id="saveNoteBtn" class="save-btn">
-                            <span>Save Note</span>
-                        </button>
+                        <div class="save-container">
+                            <button id="saveNoteBtn" class="save-btn">
+                                <span>Save Note</span>
+                            </button>
+                        </div>
+                        <div id="saveMessage" class="save-message"></div>
                     </div>
                 </div>
             </div>

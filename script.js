@@ -152,6 +152,27 @@ function updatePreview() {
     }
 }
 
+function showToastMessage(message) {
+    const toast = document.getElementById('toast');
+    const content = toast.querySelector('.toast-content');
+    const progress = toast.querySelector('.toast-progress');
+    
+    content.textContent = message;
+    
+    progress.style.width = '100%';
+    progress.classList.remove('animate');
+    
+    toast.classList.add('show');
+    
+    setTimeout(() => {
+        progress.classList.add('animate');
+    }, 10);
+    
+    setTimeout(() => {
+        toast.classList.remove('show');
+    }, 3000);
+}
+
 function showDeleteModal(note) {
     noteToDelete = note;
     const modal = document.getElementById('deleteModal');
@@ -166,7 +187,9 @@ function hideDeleteModal() {
 
 function confirmDelete() {
     if (noteToDelete) {
+        const noteName = noteToDelete.title || 'Untitled Note';
         deleteNote(noteToDelete.id);
+        showToastMessage(`Deleted note "${noteName}"`);
         hideDeleteModal();
     }
 }
@@ -228,6 +251,8 @@ function saveNote() {
     const title = titleInput || "Untitled Note";
     const notes = JSON.parse(localStorage.getItem('notes') || '[]');
 
+    const isNewNote = !currentNote;
+    
     if (currentNote) {
         const index = notes.findIndex(n => n.id === currentNote.id);
         if (index !== -1) {
@@ -246,6 +271,8 @@ function saveNote() {
 
     localStorage.setItem('notes', JSON.stringify(notes));
     loadNotes();
+    
+    showToastMessage(isNewNote ? 'Created a new note!' : 'Saved!');
 }
 
 function deleteNote(id) {
