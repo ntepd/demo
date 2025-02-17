@@ -292,3 +292,20 @@ function deleteNote(id) {
         createNewNote();
     }
 }
+
+const sidebarCollapseBtn = document.getElementById('sidebarCollapseBtn');
+const sidebar = document.querySelector('.sidebar');
+const container = document.querySelector('.container');
+sidebarCollapseBtn.addEventListener('click', () => {
+    sidebar.classList.toggle('collapsed');
+    container.classList.toggle('sidebar-collapsed');
+    
+    localStorage.setItem('sidebarCollapsed', sidebar.classList.contains('collapsed'));
+});
+document.addEventListener('DOMContentLoaded', () => {
+    const sidebarCollapsed = localStorage.getItem('sidebarCollapsed') === 'true';
+    if (sidebarCollapsed) {
+        sidebar.classList.add('collapsed');
+        container.classList.add('sidebar-collapsed');
+    }
+});
